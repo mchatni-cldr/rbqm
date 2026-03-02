@@ -22,9 +22,11 @@ export default function PortfolioPage() {
         title="Portfolio Overview"
         description="Veridian Therapeutics · 3 active studies · Agentic RBQM monitoring"
         badge={
-          <div className="flex items-center gap-2">
-            <ClouderaComponentBadge component="CAI" />
+          <div className="flex items-center gap-2 flex-wrap">
             <ClouderaComponentBadge component="CDF" />
+            <ClouderaComponentBadge component="CDE" />
+            <ClouderaComponentBadge component="CAI" />
+            <ClouderaComponentBadge component="SDX" />
           </div>
         }
         actions={
