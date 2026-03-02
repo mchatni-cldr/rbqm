@@ -36,18 +36,18 @@ export function normalizeKriPenalty(kriId: KriId, value: number): number {
   if (!def) return 0
 
   if (def.higherIsBetter) {
-    const maxGood = 100
+    const green = def.redThreshold * 1.1  // matches kriBreachStatus GREEN boundary
     const red = def.redThreshold
     const qtl = def.qtlThreshold
 
-    if (value >= maxGood) return 0
-    if (value >= red) {
-      return ((red - value) / (red - (red * 0.9))) * 30
+    if (value >= green) return 0          // GREEN zone → no penalty
+    if (value >= red) {                   // YELLOW zone → 0–30 penalty
+      return ((green - value) / (green - red)) * 30
     }
-    if (value >= qtl) {
+    if (value >= qtl) {                   // RED zone → 30–70 penalty
       return 30 + ((red - value) / (red - qtl)) * 40
     }
-    return 70 + Math.min(30, ((qtl - value) / qtl) * 30)
+    return 70 + Math.min(30, ((qtl - value) / qtl) * 30)  // QTL → 70–100
   } else {
     const green = def.redThreshold * 0.6
     const red = def.redThreshold
