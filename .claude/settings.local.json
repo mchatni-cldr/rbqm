@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "WebSearch",
-      "WebFetch(domain:www.cloudera.com)"
+      "WebFetch(domain:www.cloudera.com)",
+      "Bash(node:*)"
     ]
   }
 }
