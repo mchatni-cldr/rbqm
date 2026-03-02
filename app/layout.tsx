@@ -31,8 +31,8 @@ export default function RootLayout({
       >
         <TooltipProvider>
           <AppSidebar />
-          <div className="pl-64 min-h-screen">
-            <main className="p-6 max-w-[1400px]">
+          <div className="pl-64 min-h-screen bg-background">
+            <main className="p-8 max-w-[1400px]">
               {children}
             </main>
           </div>

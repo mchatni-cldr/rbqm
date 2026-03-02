@@ -198,10 +198,14 @@ export default function ArchitecturePage() {
         </div>
 
         {/* CDP */}
-        <div className="rounded-xl border-2 border-slate-300 bg-slate-50 p-4 mb-6">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">
-            Cloudera Data Platform (CDP)
-          </p>
+        <div className="rounded-xl border-2 border-orange-200 bg-gradient-to-br from-orange-50/50 to-white p-4 mb-6">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="h-px flex-1 bg-orange-200" />
+            <p className="text-center text-xs font-bold uppercase tracking-widest text-orange-700 px-2">
+              Cloudera Data Platform (CDP)
+            </p>
+            <div className="h-px flex-1 bg-orange-200" />
+          </div>
 
           {/* Components grid */}
           <div className="grid grid-cols-2 gap-3 mb-4">
@@ -249,7 +253,7 @@ export default function ArchitecturePage() {
 
           {/* Data lake zones */}
           <div className="mt-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 text-center mb-2">
+            <p className="text-xs font-semibold uppercase tracking-wide text-orange-600/80 text-center mb-2">
               GxP Data Lake — Three-Zone Architecture
             </p>
             <div className="grid grid-cols-3 gap-2">

@@ -32,14 +32,16 @@ export function StudyNav({ studyId, studyName }: Props) {
   return (
     <div className="mb-6">
       {/* Study header */}
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-2xl">{STUDY_ICONS[studyId]}</span>
-        <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold">{studyName}</h2>
+      <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted text-2xl">
+          {STUDY_ICONS[studyId]}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2.5">
+            <h2 className="text-xl font-bold leading-tight truncate">{studyName}</h2>
             {study && <TrafficLight tier={study.riskTier} size="sm" />}
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground mt-0.5">
             {study?.phase} · {study?.therapeuticArea} · {study?.indication} · {study?.totalSites} sites
           </p>
         </div>
@@ -47,7 +49,7 @@ export function StudyNav({ studyId, studyName }: Props) {
 
       {/* Tabs */}
       <div className="border-b border-border">
-        <nav className="flex gap-1 -mb-px">
+        <nav className="flex gap-0 -mb-px">
           {tabs.map(tab => {
             const isActive = tab.href === `/studies/${studyId}`
               ? pathname === tab.href
@@ -59,10 +61,10 @@ export function StudyNav({ studyId, studyName }: Props) {
                 key={tab.href}
                 href={tab.href}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
+                  'px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
                   isActive
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/30'
                 )}
               >
                 {tab.label}

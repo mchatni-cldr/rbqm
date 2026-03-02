@@ -18,6 +18,13 @@ const VARIANT_STYLES = {
   green: 'bg-green-50 border-green-200',
 }
 
+const ACCENT_STYLES = {
+  default: '',
+  red: 'border-l-4 border-l-red-500',
+  yellow: 'border-l-4 border-l-amber-500',
+  green: 'border-l-4 border-l-green-500',
+}
+
 const VALUE_STYLES = {
   default: 'text-foreground',
   red: 'text-red-700',
@@ -25,18 +32,25 @@ const VALUE_STYLES = {
   green: 'text-green-700',
 }
 
+const ICON_STYLES = {
+  default: 'text-muted-foreground',
+  red: 'text-red-400',
+  yellow: 'text-amber-400',
+  green: 'text-green-400',
+}
+
 export function StatCard({ label, value, sub, variant = 'default', icon, className }: StatCardProps) {
   return (
-    <Card className={cn('border', VARIANT_STYLES[variant], className)}>
+    <Card className={cn('border', VARIANT_STYLES[variant], ACCENT_STYLES[variant], className)}>
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide truncate">{label}</p>
-            <p className={cn('mt-1 text-2xl font-bold tabular-nums', VALUE_STYLES[variant])}>{value}</p>
-            {sub && <p className="mt-0.5 text-xs text-muted-foreground">{sub}</p>}
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider truncate">{label}</p>
+            <p className={cn('mt-1.5 text-2xl font-bold tabular-nums leading-none', VALUE_STYLES[variant])}>{value}</p>
+            {sub && <p className="mt-1 text-xs text-muted-foreground leading-snug">{sub}</p>}
           </div>
           {icon && (
-            <div className="ml-3 shrink-0 text-muted-foreground">
+            <div className={cn('ml-3 shrink-0', ICON_STYLES[variant])}>
               {icon}
             </div>
           )}

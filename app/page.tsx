@@ -96,14 +96,17 @@ export default function PortfolioPage() {
       </div>
 
       {/* Cloudera attribution */}
-      <div className="mt-8 rounded-xl border border-border bg-card p-5">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
-          Powered by Cloudera Data Platform
-        </p>
+      <div className="mt-8 rounded-xl border border-border bg-gradient-to-br from-slate-50 to-white p-5">
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            Powered by Cloudera Data Platform
+          </p>
+          <span className="text-[10px] text-muted-foreground/60 font-mono">CDP 7.3</span>
+        </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {(['CDF', 'CDE', 'CAI', 'SDX'] as const).map(c => (
-            <div key={c} className="rounded-lg border border-border p-3">
-              <ClouderaComponentBadge component={c} size="md" className="mb-2" />
+            <div key={c} className="rounded-lg border border-border bg-card p-3 hover:border-primary/30 transition-colors">
+              <ClouderaComponentBadge component={c} size="md" className="mb-2.5" />
               <p className="text-xs text-muted-foreground leading-snug">
                 {c === 'CDF' && '7 GxP source systems ingesting in real-time'}
                 {c === 'CDE' && 'KRI computation across 4,608 data points weekly'}

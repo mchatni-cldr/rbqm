@@ -23,17 +23,25 @@ export function StudyCard({ study }: Props) {
   return (
     <Link href={`/studies/${study.id}`} className="block group">
       <Card className={cn(
-        'border-2 transition-all hover:shadow-md hover:-translate-y-0.5',
+        'border transition-all hover:shadow-lg hover:-translate-y-0.5 overflow-hidden',
         study.riskTier === 'RED' ? 'border-red-200 hover:border-red-300' :
         study.riskTier === 'YELLOW' ? 'border-amber-200 hover:border-amber-300' :
         'border-green-200 hover:border-green-300'
       )}>
+        {/* Top accent strip */}
+        <div className={cn(
+          'h-1 w-full',
+          study.riskTier === 'RED' ? 'bg-red-500' :
+          study.riskTier === 'YELLOW' ? 'bg-amber-500' : 'bg-green-500'
+        )} />
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-3xl">{STUDY_ICONS[study.id]}</span>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted text-2xl">
+                {STUDY_ICONS[study.id]}
+              </div>
               <div>
-                <p className="text-lg font-bold leading-tight">{study.name}</p>
+                <p className="text-base font-bold leading-tight">{study.name}</p>
                 <p className="text-xs text-muted-foreground">{study.protocol} · {study.phase}</p>
               </div>
             </div>
