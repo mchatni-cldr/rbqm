@@ -6,9 +6,27 @@ interface PageHeaderProps {
   badge?: React.ReactNode
   actions?: React.ReactNode
   className?: string
+  centered?: boolean
 }
 
-export function PageHeader({ title, description, badge, actions, className }: PageHeaderProps) {
+export function PageHeader({ title, description, badge, actions, className, centered }: PageHeaderProps) {
+  if (centered) {
+    return (
+      <div className={cn('border-b border-border pb-5 mb-2 text-center', className)}>
+        {badge && <div className="mb-2.5 flex justify-center">{badge}</div>}
+        <h1 className="text-[1.65rem] font-bold tracking-tight leading-tight">{title}</h1>
+        {description && (
+          <p className="mt-1.5 text-base text-muted-foreground">{description}</p>
+        )}
+        {actions && (
+          <div className="flex items-center justify-center gap-2 mt-3">
+            {actions}
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className={cn('flex items-start justify-between gap-4 border-b border-border pb-5 mb-2', className)}>
       <div>

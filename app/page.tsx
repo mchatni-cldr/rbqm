@@ -5,7 +5,6 @@ import { StudyCard } from '@/components/portfolio/StudyCard'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { StatCard } from '@/components/ui/stat-card'
 import { ClouderaComponentBadge } from '@/components/cloudera/ClouderaComponentBadge'
-import { Badge } from '@/components/ui/badge'
 import { AlertTriangle, Activity, MapPin, TrendingUp, Server } from 'lucide-react'
 import Link from 'next/link'
 
@@ -19,16 +18,9 @@ export default function PortfolioPage() {
   return (
     <div>
       <PageHeader
+        centered
         title="Portfolio Overview"
         description="Veridian Therapeutics · 3 active studies · Agentic RBQM monitoring"
-        badge={
-          <div className="flex items-center gap-2 flex-wrap">
-            <ClouderaComponentBadge component="CDF" />
-            <ClouderaComponentBadge component="CDE" />
-            <ClouderaComponentBadge component="CAI" />
-            <ClouderaComponentBadge component="SDX" />
-          </div>
-        }
         actions={
           <Link
             href="/architecture"

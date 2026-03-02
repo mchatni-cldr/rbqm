@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { ClouderaComponentBadge } from '@/components/cloudera/ClouderaComponentBadge'
 import { gxpDataSources } from '@/data/data-sources'
 import { CLOUDERA_COMPONENTS } from '@/lib/constants'
 import { relativeTime } from '@/lib/utils'
@@ -100,13 +99,9 @@ export default function ArchitecturePage() {
   return (
     <div className="space-y-8">
       <PageHeader
+        centered
         title="Cloudera Data Architecture"
         description="GxP-compliant data foundation powering agentic RBQM · Veridian Therapeutics"
-        badge={
-          <div className="flex gap-2">
-            <ClouderaComponentBadge component="SDX" />
-          </div>
-        }
       />
 
       {/* GxP compliance banner */}
@@ -138,10 +133,10 @@ export default function ArchitecturePage() {
               <button
                 key={src.id}
                 onClick={() => setSelectedSource(selectedSource?.id === src.id ? null : src)}
-                className={`rounded-lg border p-2.5 text-center transition-all hover:shadow-sm ${
+                className={`rounded-lg border-2 p-2.5 text-center transition-all hover:shadow-sm ${
                   selectedSource?.id === src.id
-                    ? 'border-orange-400 bg-orange-50'
-                    : 'border-border hover:border-orange-300'
+                    ? 'border-orange-500 bg-orange-50'
+                    : 'border-orange-300 hover:border-orange-500'
                 }`}
               >
                 <div className="text-xl mb-1">{SOURCE_ICONS[src.id]}</div>
