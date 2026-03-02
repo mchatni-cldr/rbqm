@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useEffect, useRef } from 'react'
+import { use, useEffect, useRef, useMemo } from 'react'
 import { getActivitiesByStudy } from '@/data/agent-log'
 import { useAgentSimulation } from '@/hooks/useAgentSimulation'
 import { getAgentStatusInfo } from '@/lib/agent-engine'
@@ -19,7 +19,7 @@ interface Props {
 
 export default function AgentPage({ params }: Props) {
   const { id } = use(params)
-  const allActivities = getActivitiesByStudy(id)
+  const allActivities = useMemo(() => getActivitiesByStudy(id), [id])
   const feedBottomRef = useRef<HTMLDivElement>(null)
 
   const {
@@ -46,19 +46,20 @@ export default function AgentPage({ params }: Props) {
     <div className="space-y-4 max-w-3xl">
       <PageHeader
         title="Agent Activity Feed"
-        description="Live autonomous RBQM agent monitoring — powered by Cloudera AI"
+        description="Scripted replay of the last agent monitoring cycle — powered by Cloudera AI"
         badge={<ClouderaComponentBadge component="CAI" />}
         actions={
           <div className="flex items-center gap-2">
+            <span className="text-xs text-muted-foreground">Playback speed:</span>
             <select
               value={speedMultiplier}
               onChange={e => setSpeedMultiplier(Number(e.target.value))}
               className="rounded border border-border bg-card px-2 py-1.5 text-xs font-medium"
             >
-              <option value={1}>1× speed</option>
-              <option value={3}>3× speed</option>
-              <option value={5}>5× speed</option>
-              <option value={10}>10× speed</option>
+              <option value={1}>1×</option>
+              <option value={3}>3×</option>
+              <option value={5}>5×</option>
+              <option value={10}>10×</option>
             </select>
             <Button variant="outline" size="sm" onClick={replay} className="gap-1.5">
               <RotateCcw className="h-3.5 w-3.5" />

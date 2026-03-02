@@ -21,8 +21,9 @@ export function useAgentSimulation(
   const [isThinking, setIsThinking] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [speedMultiplier, setSpeedMultiplier] = useState(5) // default 5x for demo
-  const [running, setRunning] = useState(autoStart)
+  const [speedMultiplier, setSpeedMultiplier] = useState(1)
+  // replayCount increments trigger a fresh simulation run
+  const [replayCount, setReplayCount] = useState(autoStart ? 0 : -1)
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
   const clearAllTimeouts = useCallback(() => {
@@ -31,18 +32,18 @@ export function useAgentSimulation(
   }, [])
 
   const replay = useCallback(() => {
+    setReplayCount(c => c + 1)
+  }, [])
+
+  useEffect(() => {
+    // replayCount < 0 means autoStart=false and replay hasn't been triggered
+    if (replayCount < 0 || activities.length === 0) return
+
     clearAllTimeouts()
     setVisibleActivities([])
     setIsThinking(false)
     setIsComplete(false)
     setCurrentIndex(0)
-    setRunning(true)
-  }, [clearAllTimeouts])
-
-  useEffect(() => {
-    if (!running || activities.length === 0) return
-
-    clearAllTimeouts()
 
     let cumulative = 0
 
@@ -50,29 +51,26 @@ export function useAgentSimulation(
       const showAt = cumulative
       const thinkDuration = (activity.durationMs ?? 2000) / speedMultiplier
 
-      // Show thinking state before this activity
       const t1 = setTimeout(() => {
         setIsThinking(true)
         setCurrentIndex(index)
       }, showAt)
 
-      // Reveal the activity after thinking
       const t2 = setTimeout(() => {
         setIsThinking(false)
         setVisibleActivities(prev => [...prev, activity])
         if (index === activities.length - 1) {
           setIsComplete(true)
-          setRunning(false)
         }
       }, showAt + thinkDuration)
 
       timeoutsRef.current.push(t1, t2)
-      cumulative += thinkDuration + 300 // small gap between entries
+      cumulative += thinkDuration + 300
     })
 
     return () => clearAllTimeouts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [running, activities, speedMultiplier])
+  }, [replayCount, activities, speedMultiplier])
 
   return {
     visibleActivities,
